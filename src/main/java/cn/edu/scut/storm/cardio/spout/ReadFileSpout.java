@@ -51,7 +51,7 @@ public class ReadFileSpout extends BaseRichSpout {
 		LOGGER.info("Pushing ECG data into blocking queue.");
 		List<File> ecgFiles = FileOperations.listFile(FileConstants.INPUT_DIRECTORY);
 		for (File file : ecgFiles) {
-			String ecgData = FileOperations.readFile(file);
+			String ecgData = FileOperations.loadECG(file);
 			LOGGER.debug("ecgData's size is {}.", ecgData.length());
 			String filename = file.getName();
 			Map<String, String> dataMap = new HashMap<String, String>();

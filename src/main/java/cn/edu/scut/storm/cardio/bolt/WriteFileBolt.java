@@ -22,7 +22,7 @@ public class WriteFileBolt extends BaseBasicBolt {
 		filePath.append(FileConstants.OUTPUT_DIRECTORY).append("/").append(ecgName);
 		LOGGER.info("Saving file {}.", filePath.toString());
 		FileOperations.saveFile(filePath.toString(), ecgData);
-		LOGGER.info("Save file {} successfully.");
+		LOGGER.info("Save file {} successfully.", filePath.toString());
 	}
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {

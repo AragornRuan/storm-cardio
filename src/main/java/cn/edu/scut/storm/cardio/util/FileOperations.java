@@ -44,7 +44,7 @@ public class FileOperations {
 		return stringBuilder.toString();
 	}
 	
-	public static String readFile(File file) {
+	public static String loadECG(File file) {
 		StringBuilder stringBuilder = new StringBuilder();
 		BufferedReader bufferedReader = null;
 		try {
@@ -52,7 +52,7 @@ public class FileOperations {
 			String tempContent;
 			while ((tempContent = bufferedReader.readLine()) != null) {
 				stringBuilder.append(tempContent);
-				stringBuilder.append("\n");
+				stringBuilder.append(";");
 			}
 		} catch (Exception exception) {
 			LOGGER.error("Read file {} error.", file.getName());
