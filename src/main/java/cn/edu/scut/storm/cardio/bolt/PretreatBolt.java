@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.storm.task.ShellBolt;
 import org.apache.storm.topology.IRichBolt;
 import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.tuple.Fields;
 
 public class PretreatBolt extends ShellBolt implements IRichBolt{
 
@@ -13,7 +14,7 @@ public class PretreatBolt extends ShellBolt implements IRichBolt{
 	}
 	
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		// TODO Auto-generated method stub
+		declarer.declare(new Fields("filename", "sfreq", "xyz"));
 		
 	}
 

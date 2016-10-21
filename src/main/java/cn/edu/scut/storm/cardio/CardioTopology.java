@@ -17,9 +17,9 @@ public class CardioTopology {
 		
 		builder.setSpout("spout", new ReadFileSpout(), 1);
 		
-		//builder.setBolt("save", new WriteFileBolt(), 1).shuffleGrouping("spout");
-		
 		builder.setBolt("pretreat", new PretreatBolt(), 1).shuffleGrouping("spout");
+		
+		builder.setBolt("save", new WriteFileBolt(), 1).shuffleGrouping("pretreat");
 		
 		Config conf = new Config();
 		conf.setDebug(true);
