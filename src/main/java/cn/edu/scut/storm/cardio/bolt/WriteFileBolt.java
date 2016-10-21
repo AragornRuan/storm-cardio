@@ -21,14 +21,12 @@ public class WriteFileBolt extends BaseRichBolt {
 
 	public void execute(Tuple tuple) {
 		String fileName = tuple.getStringByField("filename");
-	//	String ecgData = tuple.getString(1);
-		long sfreq = tuple.getLongByField("sfreq");
-		String xyzStr = tuple.getStringByField("x_stt");
+		String CDG = tuple.getStringByField("WS");
 		
 		StringBuilder filePath = new StringBuilder();
 		filePath.append(FileConstants.OUTPUT_DIRECTORY).append("/").append(fileName);
 		LOGGER.info("Saving file {} with sfreq: {}.", filePath.toString());
-		FileOperations.saveFile(filePath.toString(), xyzStr);
+		FileOperations.saveFile(filePath.toString(), CDG);
 		LOGGER.info("Save file {} successfully.", filePath.toString());
 	}
 
