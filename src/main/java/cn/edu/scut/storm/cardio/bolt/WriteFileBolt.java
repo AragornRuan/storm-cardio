@@ -23,7 +23,7 @@ public class WriteFileBolt extends BaseRichBolt {
 		String fileName = tuple.getStringByField("filename");
 	//	String ecgData = tuple.getString(1);
 		long sfreq = tuple.getLongByField("sfreq");
-		String xyzStr = tuple.getStringByField("xyz");
+		String xyzStr = tuple.getStringByField("x_stt");
 		
 		StringBuilder filePath = new StringBuilder();
 		filePath.append(FileConstants.OUTPUT_DIRECTORY).append("/").append(fileName);
