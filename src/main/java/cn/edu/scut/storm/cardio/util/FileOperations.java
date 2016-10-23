@@ -105,7 +105,7 @@ public class FileOperations {
 			}
 			bufferedWriter = new BufferedWriter(new FileWriter(file));
 			bufferedWriter.write(content);
-			LOGGER.info("Write file {} successfully");
+			LOGGER.info("Write file {} successfully", filename);
 		} catch (IOException ioException) {
 			LOGGER.error("Write file {} error.", filename);
 			ioException.printStackTrace();

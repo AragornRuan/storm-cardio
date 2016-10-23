@@ -25,7 +25,7 @@ public class WriteFileBolt extends BaseRichBolt {
 		
 		StringBuilder filePath = new StringBuilder();
 		filePath.append(FileConstants.OUTPUT_DIRECTORY).append("/").append(fileName);
-		LOGGER.info("Saving file {} with sfreq: {}.", filePath.toString());
+		LOGGER.info("Saving file {}.", filePath.toString());
 		FileOperations.saveFile(filePath.toString(), CDG);
 		LOGGER.info("Save file {} successfully.", filePath.toString());
 	}

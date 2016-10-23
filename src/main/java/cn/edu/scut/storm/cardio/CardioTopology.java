@@ -16,14 +16,14 @@ public class CardioTopology {
 	public static void main(String[] args) throws Exception {
 		TopologyBuilder builder = new TopologyBuilder();
 		
-		builder.setSpout("spout", new ReadFileSpout(), 1);
-		builder.setBolt("pretreat", new PretreatBolt(), 1).shuffleGrouping("spout");
-		builder.setBolt("cutST", new CutSTBolt(), 1).shuffleGrouping("pretreat");
-		builder.setBolt("learn", new LearnBolt(), 1).shuffleGrouping("cutST");
-		builder.setBolt("save", new WriteFileBolt(), 1).shuffleGrouping("learn");
+		builder.setSpout("spout", new ReadFileSpout());
+		builder.setBolt("pretreat", new PretreatBolt(), 8).setNumTasks(8).shuffleGrouping("spout");
+		builder.setBolt("cutST", new CutSTBolt(), 8).setNumTasks(8).shuffleGrouping("pretreat");
+		builder.setBolt("learn", new LearnBolt(), 8).setNumTasks(8).shuffleGrouping("cutST");
+		builder.setBolt("save", new WriteFileBolt(), 8).setNumTasks(8).shuffleGrouping("learn");
 		
 		Config conf = new Config();
-		conf.setDebug(true);
+		conf.setDebug(false);
 		
 		if (args != null && args.length > 0) {
 			conf.setNumWorkers(1);
@@ -31,7 +31,7 @@ public class CardioTopology {
 			StormSubmitter.submitTopology(args[0], conf, builder.createTopology());
 		}
 		else {
-			conf.setMaxTaskParallelism(1);
+			conf.setMaxTaskParallelism(20);
 			
 			LocalCluster cluster = new LocalCluster();
 			cluster.submitTopology("cardio", conf, builder.createTopology());
