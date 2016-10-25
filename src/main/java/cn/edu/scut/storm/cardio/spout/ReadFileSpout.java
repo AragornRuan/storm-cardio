@@ -30,18 +30,13 @@ public class ReadFileSpout extends BaseRichSpout {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReadFileSpout.class);
 
 	public void nextTuple() {
-		LOGGER.debug("Before nextTuple()");
 		Map<String, String> dataMap = queue.poll();
 		if (dataMap == null) {
-			LOGGER.debug("data from queue is null.");
 			Utils.sleep(50);
 		}
 		else {
-			LOGGER.debug("Before emit.");
 			collector.emit(new Values(dataMap.get(ECG_NAME), dataMap.get(ECG_DATA)));
-			LOGGER.info("Spout have emitted the tuple.");
 		}
-		LOGGER.debug("After nextTuple().");
 	}
 	
 	public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {

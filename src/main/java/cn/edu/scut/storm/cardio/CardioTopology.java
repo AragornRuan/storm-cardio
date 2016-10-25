@@ -16,7 +16,7 @@ public class CardioTopology {
 	public static void main(String[] args) throws Exception {
 		TopologyBuilder builder = new TopologyBuilder();
 		
-		builder.setSpout("spout", new ReadFileSpout());
+		builder.setSpout("spout", new ReadFileSpout(), 1);
 		builder.setBolt("pretreat", new PretreatBolt(), 8).setNumTasks(8).shuffleGrouping("spout");
 		builder.setBolt("cutST", new CutSTBolt(), 8).setNumTasks(8).shuffleGrouping("pretreat");
 		builder.setBolt("learn", new LearnBolt(), 8).setNumTasks(8).shuffleGrouping("cutST");
