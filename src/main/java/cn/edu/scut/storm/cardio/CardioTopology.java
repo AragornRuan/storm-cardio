@@ -10,13 +10,15 @@ import cn.edu.scut.storm.cardio.bolt.LearnBolt;
 import cn.edu.scut.storm.cardio.bolt.PretreatBolt;
 import cn.edu.scut.storm.cardio.bolt.WriteFileBolt;
 import cn.edu.scut.storm.cardio.spout.ReadFileSpout;
+import cn.edu.scut.storm.cardio.spout.ReadRedisSpout;
 
 public class CardioTopology {
 	
 	public static void main(String[] args) throws Exception {
 		TopologyBuilder builder = new TopologyBuilder();
 		
-		builder.setSpout("spout", new ReadFileSpout(), 1);
+//		builder.setSpout("spout", new ReadFileSpout(), 1);
+		builder.setSpout("spout", new ReadRedisSpout(), 1);
 		builder.setBolt("pretreat", new PretreatBolt(), 8).setNumTasks(8).shuffleGrouping("spout");
 		builder.setBolt("cutST", new CutSTBolt(), 8).setNumTasks(8).shuffleGrouping("pretreat");
 		builder.setBolt("learn", new LearnBolt(), 8).setNumTasks(8).shuffleGrouping("cutST");

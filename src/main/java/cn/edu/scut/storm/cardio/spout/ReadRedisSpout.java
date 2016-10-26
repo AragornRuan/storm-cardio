@@ -21,7 +21,6 @@ public class ReadRedisSpout extends BaseRichSpout{
 	private static final String LIST_NAME = "testId";
 	private static final String HASH_NAME = "ecgMap";
 	private static final String REDIS_HOST = "localhost";
-	private static final String NIL = "nil"; 
 
 	
 	SpoutOutputCollector collector;
@@ -30,7 +29,7 @@ public class ReadRedisSpout extends BaseRichSpout{
 
 	public void nextTuple() {
 		String testId = jedis.lpop(LIST_NAME);
-		if (testId.equals(NIL)) {
+		if (testId == null) {
 			Utils.sleep(50);
 		}
 		else {
