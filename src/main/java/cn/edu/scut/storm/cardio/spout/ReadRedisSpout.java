@@ -1,5 +1,6 @@
 package cn.edu.scut.storm.cardio.spout;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.apache.storm.spout.SpoutOutputCollector;
@@ -12,6 +13,7 @@ import org.apache.storm.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.edu.scut.storm.cardio.util.ConvertOperations;
 import redis.clients.jedis.Jedis;
 
 public class ReadRedisSpout extends BaseRichSpout{
@@ -35,6 +37,11 @@ public class ReadRedisSpout extends BaseRichSpout{
 		else {
 			LOGGER.info("Emitting ECG {}.", testId);
 			String ecgData = jedis.hget(HASH_NAME, testId);
+			try {
+				ecgData = ConvertOperations.EcgJsonToFmat(ecgData);
+			} catch (IOException e) {
+				LOGGER.info("Convert ECG Json to fmat failed.");
+			}
 			collector.emit(new Values(testId, ecgData));
 			LOGGER.info("Emitted ECG {}.", testId);
 		}

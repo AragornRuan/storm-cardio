@@ -1,5 +1,6 @@
 package cn.edu.scut.storm.cardio.bolt;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.apache.storm.task.OutputCollector;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.edu.scut.storm.cardio.constants.FileConstants;
+import cn.edu.scut.storm.cardio.util.ConvertOperations;
 import cn.edu.scut.storm.cardio.util.FileOperations;
 
 public class WriteFileBolt extends BaseRichBolt {
@@ -22,6 +24,12 @@ public class WriteFileBolt extends BaseRichBolt {
 	public void execute(Tuple tuple) {
 		String fileName = tuple.getStringByField("filename");
 		String CDG = tuple.getStringByField("WS");
+
+		try {
+			CDG = ConvertOperations.CdgToJson(CDG);
+		} catch (IOException e) {
+			LOGGER.info("Convert CDG to Json failed.");
+		}
 		
 		StringBuilder filePath = new StringBuilder();
 		filePath.append(FileConstants.OUTPUT_DIRECTORY).append("/").append(fileName);
