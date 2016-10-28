@@ -14,7 +14,7 @@ public class CutSTBolt extends ShellBolt implements IRichBolt {
 	}
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("filename", "sfreq", "x_stt"));
+		declarer.declare(new Fields("testId", "sfreq", "x_stt"));
 		
 	}
 

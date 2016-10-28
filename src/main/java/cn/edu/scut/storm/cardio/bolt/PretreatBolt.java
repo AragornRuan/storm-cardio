@@ -14,7 +14,7 @@ public class PretreatBolt extends ShellBolt implements IRichBolt{
 	}
 	
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("filename", "sfreq", "xyz"));
+		declarer.declare(new Fields("testId", "sfreq", "xyz"));
 		
 	}
 

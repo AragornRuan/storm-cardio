@@ -14,7 +14,7 @@ public class LearnBolt extends ShellBolt implements IRichBolt {
 	}
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("filename", "WS"));
+		declarer.declare(new Fields("testId", "WS"));
 	}
 
 	public Map<String, Object> getComponentConfiguration() {
