@@ -3,11 +3,11 @@ package cn.edu.scut.storm.cardio.bolt;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
-import org.apache.storm.shade.org.apache.http.HttpResponse;
-import org.apache.storm.shade.org.apache.http.client.methods.HttpPost;
-import org.apache.storm.shade.org.apache.http.entity.StringEntity;
-import org.apache.storm.shade.org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.storm.shade.org.apache.http.impl.client.HttpClients;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.storm.shade.org.eclipse.jetty.http.HttpStatus;
 import org.apache.storm.shade.org.json.simple.JSONObject;
 import org.apache.storm.task.OutputCollector;
