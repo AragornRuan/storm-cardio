@@ -10,6 +10,7 @@ import cn.edu.scut.storm.cardio.bolt.HttpClientBolt;
 import cn.edu.scut.storm.cardio.bolt.LearnBolt;
 import cn.edu.scut.storm.cardio.bolt.PretreatBolt;
 import cn.edu.scut.storm.cardio.bolt.WriteFileBolt;
+import cn.edu.scut.storm.cardio.bolt.WriteRedisBolt;
 import cn.edu.scut.storm.cardio.spout.ReadFileSpout;
 import cn.edu.scut.storm.cardio.spout.ReadRedisSpout;
 
@@ -23,7 +24,8 @@ public class CardioTopology {
 		builder.setBolt("pretreat", new PretreatBolt(), 8).setNumTasks(8).shuffleGrouping("spout");
 		builder.setBolt("cutST", new CutSTBolt(), 8).setNumTasks(8).shuffleGrouping("pretreat");
 		builder.setBolt("learn", new LearnBolt(), 8).setNumTasks(8).shuffleGrouping("cutST");
-		builder.setBolt("save", new HttpClientBolt(), 8).setNumTasks(8).shuffleGrouping("learn");
+		builder.setBolt("save", new WriteRedisBolt(), 8).setNumTasks(8).shuffleGrouping("learn");
+//		builder.setBolt("save", new WriteFileBolt(), 8).setNumTasks(8).shuffleGrouping("learn");
 		
 		Config conf = new Config();
 		conf.setDebug(false);

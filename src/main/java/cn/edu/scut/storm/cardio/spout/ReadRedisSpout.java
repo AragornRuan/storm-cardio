@@ -41,6 +41,7 @@ public class ReadRedisSpout extends BaseRichSpout{
 				ecgData = ConvertOperations.EcgJsonToFmat(ecgData);
 			} catch (IOException e) {
 				LOGGER.info("Convert ECG Json to fmat failed.");
+				throw new RuntimeException("Convert ECG Json to fmat failed.");
 			}
 			collector.emit(new Values(testId, ecgData));
 			LOGGER.info("Emitted ECG {}.", testId);

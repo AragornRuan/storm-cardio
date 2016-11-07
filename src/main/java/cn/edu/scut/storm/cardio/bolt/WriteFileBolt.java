@@ -22,7 +22,7 @@ public class WriteFileBolt extends BaseRichBolt {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WriteFileBolt.class);
 
 	public void execute(Tuple tuple) {
-		String fileName = tuple.getStringByField("filename");
+		String fileName = tuple.getStringByField("testId");
 		String CDG = tuple.getStringByField("WS");
 
 		try {
